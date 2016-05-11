@@ -95,6 +95,18 @@ Use `rocketgrab` to pull down remote files and sort them into local directories.
 
 Overdrive is best suited for cron jobs and automated scheduling.  It copies down any TV shows that match an existing folder, and any movies that are verified via [IMDB](http://www.imdb.com/).
 
+### Hoover
+
+Hoover is used (for example) if you use itunes to manage your media, and something like [iVi](https://www.southpolesoftware.com/iVI/iVI.php) to move things around. 
+
+Hoover also uses lftp to download files, which has the capability to do segmented downloading. If your server limits the speed per connection, this will speed things up greatly.
+
+When the file has been downloaded, it is removed from the remote server (the directory stays, lftp doesn't seem to support removing directories yet)
+
+To install lftp, use homebrew. `brew install lftp`
+
+Use `hoover` to pull down remote files to your local directory. 
+
 ## Contributing
 
 1. Fork it

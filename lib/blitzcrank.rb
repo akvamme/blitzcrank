@@ -12,6 +12,7 @@ module Blitzcrank
   # Configuration defaults
   configurable_options :base_tv_dir => "",
                        :base_movie_dir => "",
+                       :base_local_dir => "",
                        :season_identifier => "Season ",
                        :remote_host => "localhost" ,
                        :remote_user => %x[whoami],
@@ -86,6 +87,12 @@ module Blitzcrank
       availableFiles.push({:path => remoteFile, :name => remoteFile.split('/').last()})
     end
     Blitzcrank.transfer_files(availableFiles)
+  end
+
+  def self.lftp_all_files
+    puts "downloading all remote videos\n"
+    Dir.chdir(Blitzcrank.config.base_local_dir)
+    %x[lftp -u #{Blitzcrank.config.remote_user}, #{Blitzcrank.config.remote_host} -e "mirror -c --use-pget-n=75 --Remove-source-files  \"#{Blitzcrank.config.remote_base_dir}\";bye"]
   end
 
   # any files (hashes) passed into here will be checked against our local TV folders and IMDB to see if it's a movie
